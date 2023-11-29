@@ -1,0 +1,24 @@
+Create your Django app in which after running the server, you should see on the browser, the text “Hello! I am learning Django”, which you defined in the index view
+
+from django.shortcuts import render 
+# Create your views here.
+from django.http import HttpResponse
+def display(request):
+ return HttpResponse("Hello! I am learning Django") 
+urls.py
+from django.urls import path
+from .views import display 
+urlpatterns = [
+ path('display/',display, name="home") 
+] 
+
+test_project 
+urls.py 
+
+from django.contrib import admin
+from django.urls import path
+from django.urls import include
+urlpatterns = [
+ path('admin/', admin.site.urls), 
+ path('home/', include("home.urls")),
+]
