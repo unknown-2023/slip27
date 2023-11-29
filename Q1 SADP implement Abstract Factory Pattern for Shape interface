@@ -1,0 +1,88 @@
+Write a Java Program to implement Abstract Factory Pattern for Shape interface
+
+interface Shape
+{
+    public void draw();
+}
+class Rectangle implements Shape
+{
+    public void draw()
+    {
+        System.out.println("In Normal Family of Product Rectangle");
+    }
+}
+
+class Square implements Shape
+{
+    public void draw()
+    {
+        System.out.println("In Normal Family of Product Square");
+    }
+}
+
+class RoundedRectangle implements Shape
+{
+    public void draw()
+    {
+        System.out.println("In Rounded Family of Product Rectangle");
+    }
+    
+}
+
+class RoundedSquare implements Shape
+{
+    public void draw()
+    {
+        System.out.println("In Rounded Family of Product Square");
+    }
+}
+abstract class AbstractGetShape
+{
+    public abstract Shape getShape(String sh);
+}
+
+class ConcreteProduct extends AbstractGetShape
+{
+    public Shape getShape(String sn)
+    {
+        if(sn.equals("Normal"))
+        {
+            return new Square();
+        }
+        else if(sn.equals("Rounded"))
+        {
+            return new RoundedRectangle();
+        }
+        return null;
+    }
+}
+class FactoryDemo 
+{
+    public Shape getFamily(boolean x)
+    {
+        ConcreteProduct ob=new ConcreteProduct();
+        if(x)
+        {
+            Shape sh=ob.getShape("Normal");
+            return sh;
+        }
+        else
+        {
+            Shape sh=ob.getShape("Rounded");
+            return sh;
+        }
+      
+    }
+}
+
+class AbstractFactoryDemo
+{
+    public static void main(String args[])
+    {
+        FactoryDemo ob=new FactoryDemo();
+        Shape shape1=ob.getFamily(true);
+        shape1.draw();
+        Shape shape2=ob.getFamily(false);
+        shape2.draw();
+    }
+}
