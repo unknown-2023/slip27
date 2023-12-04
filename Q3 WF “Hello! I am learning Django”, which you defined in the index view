@@ -1,24 +1,47 @@
-Create your Django app in which after running the server, you should see on the browser, the text “Hello! I am learning Django”, which you defined in the index view
-
+Create your Django  app in which after running  the  server, you should see on  the  
+browser, the text  “Hello! I am learning Django”, which you defined in the index view.   
+-------------------------------
+#steps to execute
+1.create a folder in any localdisck for example D
+2.Open cmd in that folder
+3.python -m django startproject myprooject
+4.cd myprooject
+5.python manage.py startapp myapp
+6.python manage.py runserver --> last command on cmd
+7.paste code in respective folder (foldername.py)
+8.1st urls paste in app (create new urls.py)
+9.2nd urls in exsisting
+--------------------------------------------------------------------------------------------
 from django.shortcuts import render 
 # Create your views here.
+
+views.py
 from django.http import HttpResponse
-def display(request):
- return HttpResponse("Hello! I am learning Django") 
+def index(request):
+    return HttpResponse("Hello! I am learning Django")
+
+Create a URL Mapping
+In the same app directory, create a urls.py file (e.g., myapp/urls.py) if it doesn't exist, and define a URL mapping for your view:
 urls.py
 from django.urls import path
-from .views import display 
-urlpatterns = [
- path('display/',display, name="home") 
-] 
+from . import views
 
-test_project 
-urls.py 
-
-from django.contrib import admin
-from django.urls import path
-from django.urls import include
 urlpatterns = [
- path('admin/', admin.site.urls), 
- path('home/', include("home.urls")),
+    path('', views.index, name='index'),
 ]
+
+Configure the Project URL Routing
+Open the project's urls.py file (e.g., myproject/urls.py) and include the URL patterns of your app:
+urls.py
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),			//already existing in the urls.py file
+    path('', include('myapp.urls')),			//add line for url routing
+]
+
+Run the Development Server
+python manage.py runserver
+
+Open your web browser and go to http://127.0.0.1:8000/. 
